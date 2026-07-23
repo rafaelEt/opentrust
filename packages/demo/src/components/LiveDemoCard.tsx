@@ -1,14 +1,10 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { OpenTrust } from 'opentrust-sdk';
-import { Check, X, Loader2, Shield } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import type { OpenTrustResult } from 'opentrust-sdk';
 
 type Status = 'idle' | 'analyzing' | 'done' | 'error';
-
-interface SignalRow {
-  label: string;
-  ok: boolean;
-}
 
 interface LiveDemoCardProps {
   triggerVerify?: number;
@@ -16,46 +12,23 @@ interface LiveDemoCardProps {
 
 export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
   const [status, setStatus] = useState<Status>('idle');
-  const [signals, setSignals] = useState<SignalRow[]>([]);
-  const [score, setScore] = useState(0);
-  const mountedRef = useRef(true);
+  const [result, setResult] = useState<OpenTrustResult | null>(null);
 
   useEffect(() => {
-    return () => { mountedRef.current = false; };
-  }, []);
-
-  useEffect(() => {
-    if (triggerVerify > 0) {
-      run();
-    }
+    if (triggerVerify > 0) run();
   }, [triggerVerify]);
 
   const run = useCallback(async () => {
     setStatus('analyzing');
-    setSignals([]);
-
+    setResult(null);
     try {
-      const result = await OpenTrust.verify({ camera: true, timeout: 12000 });
-
-      setSignals([
-        { label: 'Camera access', ok: true },
-        { label: 'Face detected', ok: result.signals.faceDetected },
-        { label: 'Natural movement', ok: result.signals.livenessScore > 0.4 },
-        { label: 'Browser verified', ok: !result.signals.browserAutomationDetected },
-      ]);
-      setScore(Math.round(result.humanScore * 100));
+      const res = await OpenTrust.verify({ camera: true, timeout: 12000 });
+      setResult(res);
       setStatus('done');
     } catch {
       setStatus('error');
     }
   }, []);
-
-  const analyzingRows = [
-    { label: 'Camera access' },
-    { label: 'Face detected' },
-    { label: 'Natural movement' },
-    { label: 'Browser verified' },
-  ];
 
   return (
     <div className="code-window shadow-2xl">
@@ -69,114 +42,100 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
         <span className="text-zinc-600">v0.1.0</span>
       </div>
 
-      <div className="p-5 space-y-5">
-        {/* Status */}
-        <div>
-          <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Status</div>
-          <div className="flex items-center gap-2">
-            {status === 'idle' && <span className="text-sm font-mono text-zinc-500">ready</span>}
-            {status === 'analyzing' && (
-              <>
-                <span className="status-dot bg-indigo-400 animate-pulse" />
-                <span className="text-sm font-mono text-indigo-300">analyzing...</span>
-              </>
-            )}
-            {status === 'done' && (
-              <>
-                <span className="status-dot bg-emerald-500" />
-                <span className="text-sm font-mono text-emerald-300">verified</span>
-              </>
-            )}
-            {status === 'error' && (
-              <>
-                <span className="status-dot bg-red-500" />
-                <span className="text-sm font-mono text-red-300">failed</span>
-              </>
-            )}
-          </div>
+      <div className="p-5">
+        {/* Status bar */}
+        <div className="flex items-center gap-2 mb-4 pb-4 border-b border-zinc-800/60">
+          {status === 'idle' && (
+            <>
+              <span className="w-2 h-2 rounded-full bg-zinc-600" />
+              <span className="text-xs font-mono text-zinc-500">ready</span>
+            </>
+          )}
+          {status === 'analyzing' && (
+            <>
+              <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+              <span className="text-xs font-mono text-indigo-300">analyzing...</span>
+            </>
+          )}
+          {status === 'done' && (
+            <>
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="text-xs font-mono text-emerald-300">verified</span>
+            </>
+          )}
+          {status === 'error' && (
+            <>
+              <span className="w-2 h-2 rounded-full bg-red-500" />
+              <span className="text-xs font-mono text-red-300">verification failed</span>
+            </>
+          )}
         </div>
 
-        {/* Signals */}
-        <div>
-          <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2.5">Signals</div>
-          <div className="space-y-1.5">
-            <AnimatePresence mode="popLayout">
-              {(status === 'analyzing' ? analyzingRows : signals).map((s: any, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1, duration: 0.25 }}
-                  className="flex items-center justify-between py-2 px-3 rounded-lg bg-zinc-950/60"
-                >
-                  <span className="text-sm text-zinc-300">{s.label}</span>
-                  <span className="text-xs font-mono">
-                    {status === 'analyzing' ? (
-                      <span className="text-indigo-400 animate-pulse inline-flex items-center gap-1">
-                        <Loader2 size={11} className="animate-spin" />
-                        scan
-                      </span>
-                    ) : s.ok ? (
-                      <span className="text-emerald-400 inline-flex items-center gap-1">
-                        <Check size={11} strokeWidth={2.5} /> OK
-                      </span>
-                    ) : (
-                      <span className="text-zinc-600 inline-flex items-center gap-1">
-                        <X size={11} strokeWidth={2} /> --
-                      </span>
-                    )}
-                  </span>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Score */}
-        <div>
-          <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-2">Human Confidence</div>
+        {/* JSON output */}
+        <div className="font-mono text-sm leading-relaxed min-h-[260px]">
           <AnimatePresence mode="wait">
             {status === 'idle' && (
-              <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl font-bold font-mono text-zinc-700">
-                ---
+              <motion.div
+                key="idle"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-zinc-700"
+              >
+                Run verification to see results
               </motion.div>
             )}
+
             {status === 'analyzing' && (
-              <motion.div key="analyzing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3">
-                <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-indigo-400 rounded-full"
-                    initial={{ width: '0%' }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 3, ease: 'easeInOut' }}
-                  />
+              <motion.div
+                key="analyzing"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-1 text-zinc-500"
+              >
+                <div className="flex items-center gap-2 text-indigo-400">
+                  <Loader2 size={12} className="animate-spin" />
+                  Requesting camera access...
                 </div>
-                <span className="text-sm font-mono text-indigo-300 w-10 text-right animate-pulse">--%</span>
+                <div className="text-zinc-700">{'{'}</div>
+                <div className="text-zinc-700">  "humanScore": ?</div>
+                <div className="text-zinc-700">  "signals": ?</div>
+                <div className="text-zinc-700">{'}'}</div>
               </motion.div>
             )}
-            {status === 'done' && (
+
+            {status === 'done' && result && (
               <motion.div
                 key="done"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                className="flex items-center gap-3"
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ background: score > 70 ? '#22c55e' : score > 40 ? '#eab308' : '#ef4444' }}
-                    initial={{ width: '0%' }}
-                    animate={{ width: `${score}%` }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                  />
-                </div>
-                <span className="text-2xl font-bold font-mono text-zinc-100 w-14 text-right tabular-nums">{score}%</span>
+                <pre className="text-zinc-200 whitespace-pre-wrap">
+                  <span className="text-zinc-500">{'{'}</span>{'\n'}
+                  <span className="text-indigo-300">  "humanScore"</span>: <span className="text-emerald-300">{result.humanScore}</span>,{'\n'}
+                  <span className="text-indigo-300">  "signals"</span>: <span className="text-zinc-500">{'{'}</span>{'\n'}
+                  <span className="text-indigo-300">    "faceDetected"</span>: <span className="text-amber-300">{String(result.signals.faceDetected)}</span>,{'\n'}
+                  <span className="text-indigo-300">    "livenessScore"</span>: <span className="text-emerald-300">{result.signals.livenessScore}</span>,{'\n'}
+                  <span className="text-indigo-300">    "virtualCameraDetected"</span>: <span className="text-amber-300">{String(result.signals.virtualCameraDetected)}</span>,{'\n'}
+                  <span className="text-indigo-300">    "browserAutomationDetected"</span>: <span className="text-amber-300">{String(result.signals.browserAutomationDetected)}</span>,{'\n'}
+                  <span className="text-indigo-300">    "replayRisk"</span>: <span className="text-emerald-300">{result.signals.replayRisk}</span>,{'\n'}
+                  <span className="text-indigo-300">    "audioScore"</span>: <span className="text-emerald-300">{result.signals.audioScore}</span>,{'\n'}
+                  <span className="text-indigo-300">    "virtualMicDetected"</span>: <span className="text-amber-300">{String(result.signals.virtualMicDetected)}</span>,{'\n'}
+                  <span className="text-zinc-500">  </span>{'}'},{'\n'}
+                  <span className="text-indigo-300">  "timestamp"</span>: <span className="text-amber-300">{result.timestamp}</span>,{'\n'}
+                  <span className="text-zinc-500">{'}'}</span>
+                </pre>
               </motion.div>
             )}
+
             {status === 'error' && (
-              <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm font-mono text-red-400">
-                Camera unavailable or denied
+              <motion.div
+                key="error"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-400"
+              >
+                Camera unavailable or permission denied
               </motion.div>
             )}
           </AnimatePresence>
@@ -186,7 +145,7 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
         <button
           onClick={run}
           disabled={status === 'analyzing'}
-          className="w-full py-2 rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-zinc-950 hover:bg-zinc-200"
+          className="w-full mt-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-zinc-950 hover:bg-zinc-200"
         >
           {status === 'idle' && 'Run Verification'}
           {status === 'analyzing' && 'Analyzing...'}
