@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: rgba(161, 161, 170, 0.2);
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-500;
+  }
+
+  .bento-card {
+    @apply bg-zinc-900/50 border border-zinc-800/80 rounded-xl p-6 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/80;
+  }
+
+  .code-window {
+    @apply bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden;
+  }
+
+  .code-header {
+    @apply flex items-center justify-between px-4 py-2.5 bg-zinc-900/60 border-b border-zinc-800/80 text-xs text-zinc-400 font-mono;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-white text-zinc-950 font-medium text-sm px-5 py-2.5 rounded-lg hover:bg-zinc-200 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-zinc-900 border border-zinc-800 text-zinc-300 font-medium text-sm px-5 py-2.5 rounded-lg hover:bg-zinc-800 hover:text-white transition-all duration-200;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-zinc-900/80 border border-zinc-800 text-zinc-300;
+  }
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+}
