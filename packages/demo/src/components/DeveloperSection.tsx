@@ -40,7 +40,7 @@ export function DeveloperSection() {
             Built for developers.
           </h2>
           <p className="text-base text-zinc-400 max-w-xl leading-relaxed">
-            Install, import, and verify in less than a minute.
+            Install, import, and start collecting trust signals in minutes.
           </p>
         </motion.div>
 
@@ -80,8 +80,8 @@ export function DeveloperSection() {
                 {'\n'}  camera: <span className="text-indigo-300">true</span>,
                 {'\n'}{'}'});
                 {'\n'}
-                {'\n'}console.log(result.humanScore);
-                {'\n'}<span className="text-zinc-500">//</span> <span className="text-zinc-500">0.94</span>
+                {'\n'}console.log(result.trustScore);
+                {'\n'}<span className="text-zinc-500">//</span> <span className="text-zinc-500">0.87</span>
               </pre>
             </div>
           </motion.div>

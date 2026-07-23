@@ -75,7 +75,7 @@ export class OpenTrust {
       }
     }
 
-    // Step 4: Compute overall human score
+    // Step 4: Compute overall trust score
     const weights = {
       liveness: 0.3,
       automation: 0.25,
@@ -84,30 +84,30 @@ export class OpenTrust {
       audio: 0.2,
     };
 
-    let humanScore = 0;
+    let trustScore = 0;
 
-    humanScore += livenessScore * weights.liveness;
+    trustScore += livenessScore * weights.liveness;
 
     if (automation.detected) {
-      humanScore += (1 - automation.confidence) * weights.automation;
+      trustScore += (1 - automation.confidence) * weights.automation;
     } else {
-      humanScore += weights.automation;
+      trustScore += weights.automation;
     }
 
-    humanScore += (1 - replayRisk) * weights.replay;
+    trustScore += (1 - replayRisk) * weights.replay;
 
     if (faceDetected) {
-      humanScore += weights.facePresence;
+      trustScore += weights.facePresence;
     }
 
-    humanScore += audioScore * weights.audio;
+    trustScore += audioScore * weights.audio;
 
-    humanScore = Math.min(1, Math.max(0, humanScore));
+    trustScore = Math.min(1, Math.max(0, trustScore));
 
     const elapsed = performance.now() - startTime;
 
     return {
-      humanScore,
+      trustScore,
       signals: {
         faceDetected,
         livenessScore,

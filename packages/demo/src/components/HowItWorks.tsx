@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Cpu, BarChart3, ArrowDown } from 'lucide-react';
+import { Shield, Cpu, BarChart3 } from 'lucide-react';
 
 const steps = [
   {
@@ -17,8 +17,8 @@ const steps = [
   {
     icon: BarChart3,
     num: '03',
-    title: 'Receive a confidence score',
-    desc: 'Your app gets a score from 0–1 with detailed signals. No images, video, or audio leave the device.',
+    title: 'Receive a trust score',
+    desc: 'Your app receives a trust score (0–1) with detailed signal breakdowns. No data leaves the device.',
   },
 ];
 
@@ -35,10 +35,10 @@ export function HowItWorks() {
         >
           <div className="pill mb-4">How it works</div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100 mb-3">
-            Three steps to verify trust.
+            Collect trust signals in three steps.
           </h2>
           <p className="text-base text-zinc-400 max-w-xl leading-relaxed">
-            Privacy-first verification that integrates in minutes.
+            Privacy-first browser analysis that integrates in minutes.
           </p>
         </motion.div>
 
@@ -88,7 +88,7 @@ export function HowItWorks() {
               </div>
               <pre className="p-4 font-mono text-sm leading-6 text-zinc-200 overflow-x-auto">
                 <span className="text-zinc-500">{'{'}</span>
-                {'\n'}  <span className="text-indigo-300">"humanScore"</span>: <span className="text-emerald-300">0.94</span>,
+                {'\n'}  <span className="text-indigo-300">"trustScore"</span>: <span className="text-emerald-300">0.87</span>,
                 {'\n'}  <span className="text-zinc-500">// signals, timestamp...</span>
                 {'\n'}<span className="text-zinc-500">{'}'}</span>
               </pre>

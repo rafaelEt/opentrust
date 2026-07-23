@@ -26,7 +26,7 @@ Only the **result object** leaves the SDK:
 
 ```typescript
 {
-  humanScore: number,      // 0-1 confidence score
+   trustScore: number,      // 0-1 confidence score
   signals: {
     faceDetected: boolean,
     livenessScore: number,

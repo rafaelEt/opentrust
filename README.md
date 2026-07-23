@@ -1,8 +1,8 @@
 # OpenTrust
 
-**Open-source trust layer for proving a real human is behind an online interaction.**
+**Privacy-first browser trust signals for modern web applications.**
 
-OpenTrust is a privacy-first SDK that gives websites confidence signals to distinguish real humans from AI-generated deepfakes and automated browsers.
+OpenTrust is an open-source SDK that collects privacy-preserving browser signals to help developers estimate the trustworthiness of a browser interaction. It provides signals — not decisions — designed to be combined with authentication, device reputation, and server-side verification systems.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/opentrust-sdk)](https://www.npmjs.com/package/opentrust-sdk)
@@ -11,18 +11,41 @@ OpenTrust is a privacy-first SDK that gives websites confidence signals to disti
 
 ---
 
-## The Problem
+## Overview
 
-AI can now generate photorealistic faces, synthesize voice and video in real time, and drive headless browsers indistinguishable from real users. The internet has no native way to ask: **"Is there a real human here?"**
+OpenTrust exposes browser-side trust signals through a clean TypeScript API:
 
-## The Solution
+- **Browser automation detection** — webdriver flags, headless browsers, abnormal properties
+- **Webcam integrity checks** — virtual camera detection, static/replayed video analysis
+- **Passive liveness analysis** — face presence, motion, blink detection
+- **Microphone integrity** — virtual mic detection, audio signal analysis
 
-OpenTrust is an **open-source client-side SDK** that runs checks in the browser and returns confidence signals:
+All processing is client-side. Raw frames never leave the device.
 
-- **Browser automation detection** — webdriver, headless browsers, abnormal properties
-- **Webcam integrity checks** — virtual cameras, static/replayed video, frame anomalies
-- **Passive liveness detection** — face presence, natural movement, blinks
-- **Privacy-first architecture** — all processing locally; raw frames never leave
+## When to use OpenTrust
+
+OpenTrust is designed to provide **additional signals** for:
+
+- Fraud prevention workflows
+- Risk scoring and trust estimation
+- Bot mitigation systems
+- Browser integrity checks
+- Research and experimentation
+- Developer tooling and prototypes
+
+## When not to use OpenTrust
+
+OpenTrust is **not** a replacement for:
+
+- KYC (Know Your Customer)
+- Identity verification
+- Enterprise liveness detection
+- Device attestation
+- Server-side fraud detection
+
+## Philosophy
+
+Security is built from multiple layers. OpenTrust intentionally focuses on browser-side trust signals and should be combined with server-side verification and authentication systems. The SDK returns confidence signals — not binary "human/bot" judgments.
 
 ---
 
@@ -41,7 +64,7 @@ const result = await OpenTrust.verify({
   camera: true,
 });
 
-console.log(result.humanScore);     // 0.85
+console.log(result.trustScore);     // 0.85
 console.log(result.signals);
 // {
 //   faceDetected: true,
@@ -68,7 +91,7 @@ console.log(result.signals);
 
 ```typescript
 {
-  humanScore: number,         // 0.0 - 1.0
+  trustScore: number,         // 0.0 - 1.0
   signals: {
     faceDetected: boolean,
     livenessScore: number,
@@ -98,7 +121,7 @@ function VerificationButton() {
 
   return (
     <button onClick={() => verify({ camera: true })} disabled={loading}>
-      {loading ? 'Verifying...' : "Verify I'm Human"}
+      {loading ? 'Analyzing...' : 'Collect Trust Signals'}
     </button>
   );
 }

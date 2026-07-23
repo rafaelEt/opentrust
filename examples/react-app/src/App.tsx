@@ -12,7 +12,7 @@ function ResultCard({ result }: { result: OpenTrustResult }) {
       maxWidth: 480,
     }}>
       <h2 style={{ margin: 0, color: '#e2e8f0', fontSize: '1.5rem' }}>
-        Human Score: {(result.humanScore * 100).toFixed(0)}%
+        Trust Score: {(result.trustScore * 100).toFixed(0)}%
       </h2>
       <pre style={{
         color: '#94a3b8',

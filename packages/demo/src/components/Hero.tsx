@@ -22,24 +22,25 @@ export function Hero({ onTryDemo, triggerVerify }: HeroProps) {
             transition={{ duration: 0.5 }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-zinc-900/80 border border-zinc-800 text-zinc-400 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Open-source trust layer for human presence
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+              Open-source browser trust signals SDK
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-100 leading-[1.05] mb-5">
-              Prove there's a real human{' '}
-              <span className="gradient-text">behind the screen.</span>
+              Browser trust signals{' '}
+              <span className="gradient-text">for the AI era.</span>
             </h1>
 
             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-xl mb-8">
-              OpenTrust is an open-source SDK that helps applications verify
-              human presence using privacy-first browser signals.
+              OpenTrust is an open-source SDK that helps developers collect privacy-first
+              browser trust signals — browser integrity, automation detection, webcam
+              integrity, and passive liveness.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button onClick={onTryDemo} className="btn-primary">
                 <Play size={15} strokeWidth={2} />
-                Try Human Verification
+                Run Trust Analysis
               </button>
               <a
                 href="https://github.com/rafaelEt/opentrust"

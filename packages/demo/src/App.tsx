@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Problem } from './components/Problem';
 import { HowItWorks } from './components/HowItWorks';
-import { DeveloperSection } from './components/DeveloperSection';
 import { UseCases } from './components/UseCases';
+import { SecurityPhilosophy } from './components/SecurityPhilosophy';
+import { DeveloperSection } from './components/DeveloperSection';
 import { OpenSource } from './components/OpenSource';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
@@ -22,10 +22,10 @@ export function App() {
       <Navbar />
       <main>
         <Hero onTryDemo={handleTryDemo} triggerVerify={triggerVerify} />
-        <Problem />
         <HowItWorks />
-        <DeveloperSection />
         <UseCases />
+        <SecurityPhilosophy />
+        <DeveloperSection />
         <OpenSource />
         <FinalCTA />
       </main>

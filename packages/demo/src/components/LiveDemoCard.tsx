@@ -60,13 +60,13 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
           {status === 'done' && (
             <>
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-xs font-mono text-emerald-300">verified</span>
+              <span className="text-xs font-mono text-emerald-300">signals collected</span>
             </>
           )}
           {status === 'error' && (
             <>
               <span className="w-2 h-2 rounded-full bg-red-500" />
-              <span className="text-xs font-mono text-red-300">verification failed</span>
+              <span className="text-xs font-mono text-red-300">analysis failed</span>
             </>
           )}
         </div>
@@ -81,7 +81,7 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
                 animate={{ opacity: 1 }}
                 className="text-zinc-700"
               >
-                Run verification to see results
+                Run analysis to collect trust signals
               </motion.div>
             )}
 
@@ -97,7 +97,7 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
                   Requesting camera access...
                 </div>
                 <div className="text-zinc-700">{'{'}</div>
-                <div className="text-zinc-700">  "humanScore": ?</div>
+                <div className="text-zinc-700">  "trustScore": ?</div>
                 <div className="text-zinc-700">  "signals": ?</div>
                 <div className="text-zinc-700">{'}'}</div>
               </motion.div>
@@ -112,7 +112,7 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
               >
                 <pre className="text-zinc-200 whitespace-pre-wrap">
                   <span className="text-zinc-500">{'{'}</span>{'\n'}
-                  <span className="text-indigo-300">  "humanScore"</span>: <span className="text-emerald-300">{result.humanScore}</span>,{'\n'}
+                  <span className="text-indigo-300">  "trustScore"</span>: <span className="text-emerald-300">{result.trustScore}</span>,{'\n'}
                   <span className="text-indigo-300">  "signals"</span>: <span className="text-zinc-500">{'{'}</span>{'\n'}
                   <span className="text-indigo-300">    "faceDetected"</span>: <span className="text-amber-300">{String(result.signals.faceDetected)}</span>,{'\n'}
                   <span className="text-indigo-300">    "livenessScore"</span>: <span className="text-emerald-300">{result.signals.livenessScore}</span>,{'\n'}
@@ -147,9 +147,9 @@ export function LiveDemoCard({ triggerVerify = 0 }: LiveDemoCardProps) {
           disabled={status === 'analyzing'}
           className="w-full mt-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-white text-zinc-950 hover:bg-zinc-200"
         >
-          {status === 'idle' && 'Run Verification'}
+          {status === 'idle' && 'Collect Trust Signals'}
           {status === 'analyzing' && 'Analyzing...'}
-          {status === 'done' && 'Verify Again'}
+          {status === 'done' && 'Analyze Again'}
           {status === 'error' && 'Retry'}
         </button>
       </div>

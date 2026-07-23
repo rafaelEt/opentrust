@@ -32,13 +32,13 @@ OpenTrust is a privacy-first, client-side SDK that runs entirely in the browser.
 │  │  ┌──────────────────▼──────────────────────┐  │  │
 │  │  │         Scoring Engine                  │  │  │
 │  │  │                                         │  │  │
-│  │  │  humanScore = weighted combination of   │  │  │
+│  │  │  trustScore = weighted combination of   │  │  │
 │  │  │  liveness, automation, replay, face     │  │  │
 │  │  └──────────────────┬──────────────────────┘  │  │
 │  │                     │                         │  │
 │  │  ┌──────────────────▼──────────────────────┐  │  │
 │  │  │         OpenTrustResult                  │  │  │
-│  │  │  { humanScore, signals, timestamp }     │  │  │
+│  │  │  { trustScore, signals, timestamp }     │  │  │
 │  │  └─────────────────────────────────────────┘  │  │
 │  └───────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────┘

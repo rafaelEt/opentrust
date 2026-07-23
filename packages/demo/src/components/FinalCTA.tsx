@@ -15,13 +15,13 @@ export function FinalCTA() {
           transition={{ duration: 0.4 }}
         >
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100 mb-5 leading-[1.1]">
-            The internet needs{' '}
-            <span className="gradient-text">a new trust layer.</span>
+            Build smarter{' '}
+            <span className="gradient-text">risk engines.</span>
           </h2>
 
           <p className="text-base sm:text-lg text-zinc-400 mb-10 max-w-lg mx-auto leading-relaxed">
-            AI-generated content is everywhere. OpenTrust helps you distinguish
-            real people from synthetic ones — privately and openly.
+            OpenTrust is open source, MIT-licensed, and ready to integrate.
+            Add browser trust signals to your stack today.
           </p>
 
           <div className="flex justify-center">

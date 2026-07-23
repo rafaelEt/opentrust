@@ -1,7 +1,7 @@
 {
   "name": "opentrust-sdk",
   "version": "0.1.3",
-  "description": "OpenTrust SDK — Privacy-first human presence verification. Detect bots, deepfakes, and automated browsers.",
+  "description": "OpenTrust SDK — Open-source browser trust signals SDK. Collect privacy-first signals for browser integrity, automation detection, and passive liveness.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -34,12 +34,12 @@
   "keywords": [
     "open-trust",
     "liveness",
-    "deepfake-detection",
+    "trust-signals",
+    "browser-integrity",
     "bot-detection",
     "privacy-first",
     "browser-automation",
-    "anti-fraud",
-    "captcha"
+    "risk-scoring"
   ],
   "license": "MIT"
 }

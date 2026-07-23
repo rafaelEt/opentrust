@@ -15,7 +15,7 @@ export interface OpenTrustSignals {
 }
 
 export interface OpenTrustResult {
-  humanScore: number;
+  trustScore: number;
   signals: OpenTrustSignals;
   timestamp: number;
 }
