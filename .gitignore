@@ -8,3 +8,5 @@ dist-browser
 .env.local
 .DS_Store
 *.tgz
+.vercel
+.env*
