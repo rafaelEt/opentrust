@@ -6,6 +6,8 @@ OpenTrust is a privacy-first SDK that gives websites confidence signals to disti
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![npm](https://img.shields.io/npm/v/opentrust-sdk)](https://www.npmjs.com/package/opentrust-sdk)
+[![Website](https://img.shields.io/badge/demo-open--trust.vercel.app-8b5cf6)](https://open--trust.vercel.app)
+[![GitHub](https://img.shields.io/badge/github-rafaelEt/opentrust-181717)](https://github.com/rafaelEt/opentrust)
 
 ---
 
@@ -118,7 +120,7 @@ function VerificationButton() {
 ## Demo
 
 ```bash
-git clone https://github.com/anomalyco/opentrust.git
+git clone https://github.com/rafaelEt/opentrust.git
 cd opentrust
 npm install
 npm run dev
@@ -131,6 +133,8 @@ docker compose up
 ```
 
 Visit [http://localhost:3000](http://localhost:3000).
+
+Or try the live demo: [https://open--trust.vercel.app](https://open--trust.vercel.app)
 
 ---
 
@@ -148,4 +152,4 @@ MIT — see [LICENSE](LICENSE).
 
 ## Contributing
 
-Contributions welcome. [GitHub](https://github.com/anomalyco/opentrust)
+Contributions welcome. [GitHub](https://github.com/rafaelEt/opentrust) · [Live Demo](https://open--trust.vercel.app)

@@ -26,7 +26,7 @@ export function FinalCTA() {
 
           <div className="flex justify-center">
             <a
-              href="https://github.com/anomalyco/opentrust"
+              href="https://github.com/rafaelEt/opentrust"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"

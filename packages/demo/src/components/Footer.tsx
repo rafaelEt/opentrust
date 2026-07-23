@@ -14,7 +14,7 @@ export function Footer() {
           <span className="text-sm text-zinc-600">OpenTrust — MIT License</span>
         </div>
         <div className="flex items-center gap-5 text-xs text-zinc-600">
-          <a href="https://github.com/anomalyco/opentrust" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors inline-flex items-center gap-1">
+          <a href="https://github.com/rafaelEt/opentrust" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-400 transition-colors inline-flex items-center gap-1">
             <GithubIcon size={12} />
             GitHub
           </a>

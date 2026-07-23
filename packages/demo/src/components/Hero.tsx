@@ -42,7 +42,7 @@ export function Hero({ onTryDemo, triggerVerify }: HeroProps) {
                 Try Human Verification
               </button>
               <a
-                href="https://github.com/anomalyco/opentrust"
+                href="https://github.com/rafaelEt/opentrust"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"

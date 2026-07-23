@@ -1,6 +1,6 @@
 {
   "name": "opentrust-react",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "React hook for OpenTrust SDK",
   "type": "module",
   "main": "./dist/index.js",
@@ -14,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anomalyco/opentrust.git"
+    "url": "git+https://github.com/rafaelEt/opentrust.git"
   },
-  "homepage": "https://github.com/anomalyco/opentrust#readme",
+  "homepage": "https://github.com/rafaelEt/opentrust#readme",
   "bugs": {
-    "url": "https://github.com/anomalyco/opentrust/issues"
+    "url": "https://github.com/rafaelEt/opentrust/issues"
   },
   "peerDependencies": {
     "react": "^18.0.0",

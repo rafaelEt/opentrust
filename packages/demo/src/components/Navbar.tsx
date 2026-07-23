@@ -16,7 +16,7 @@ export function Navbar() {
 
         <nav className="flex items-center gap-5">
           <a
-            href="https://github.com/anomalyco/opentrust"
+            href="https://github.com/rafaelEt/opentrust"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-medium text-zinc-400 hover:text-white transition-colors hidden sm:flex items-center gap-1.5"

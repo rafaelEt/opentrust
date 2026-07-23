@@ -5,7 +5,7 @@ We welcome contributions! Here's how to get started.
 ## Development
 
 ```bash
-git clone https://github.com/anomalyco/opentrust.git
+git clone https://github.com/rafaelEt/opentrust.git
 cd opentrust
 npm install
 npm run build

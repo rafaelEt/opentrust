@@ -30,7 +30,7 @@ export function OpenSource() {
             <div className="flex flex-wrap gap-3 mb-8">
               <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-400">
                 <GithubIcon size={15} />
-                anomalyco/opentrust
+                rafaelEt/opentrust
               </div>
               <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-400">
                 <FileCode size={15} strokeWidth={1.5} className="text-zinc-500" />
@@ -39,7 +39,7 @@ export function OpenSource() {
             </div>
 
             <a
-              href="https://github.com/anomalyco/opentrust"
+              href="https://github.com/rafaelEt/opentrust"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex"
